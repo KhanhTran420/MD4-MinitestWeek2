@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit book</title>
+</head>
+<body>
+<h1>Chỉnh sửa sách</h1>
+
+<th:block th:if="${message}">
+    < th:text="${message}"></p>
+</th:block>
+<form th:action="@{/edit-book}" th:object="${book}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên sách:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Giá thành:</td>
+            <td><input type="text" th:field="*{price}"/></td>
+        </tr>
+        <tr>
+            <td>Tác giả:</td>
+            <td><input type="text" th:field="*{author}"/></td>
+        </tr>
+        <tr>
+            <td>Hình ảnh:</td>
+            <td><input type="file" name="image"/></td>
+        </tr>
+        <tr>
+            <td>Thể loại:</td>
+            <td>
+                <select name="category">
+                    <option th:each="c : ${category}"
+                            th:value="${c.id}"
+                            th:text="${c.name}"
+                            th:selected="(${book.category}) and (${c.id} == *{category.id})">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Chỉnh sửa"></td>
+        </tr>
+    </table>
+</form>
+<a href="/books">Trở về</a>
+</body>
+</html>

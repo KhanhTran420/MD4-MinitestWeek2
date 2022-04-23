@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa thể loại</title>
+</head>
+<body>
+<h1>Chỉnh sửa thể loại</h1>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/edit-category}" th:object="${category}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Thể loại:</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Mô tả:</td>
+            <td><input type="text" th:field="*{description}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Chỉnh sửa"></td>
+        </tr>
+    </table>
+</form>
+<a href="/category">Trở về</a>
+</body>
+</html>

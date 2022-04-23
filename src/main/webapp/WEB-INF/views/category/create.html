@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới thể loại</title>
+</head>
+<body>
+<h1 >Thêm mới thể loại</h1>
+<th:block th:if="${message}">
+    <p  th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create-category}" th:object="${category}" method="post">
+    <table>
+        <tr>
+            <td>Thể loại:</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Mô tả:</td>
+            <td><input type="text" th:field="*{description}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Thêm mới"></td>
+        </tr>
+    </table>
+</form>
+<br>
+<a href="/category">Trở về</a>
+</body>
+</html>

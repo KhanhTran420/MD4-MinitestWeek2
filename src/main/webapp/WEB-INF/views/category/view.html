@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View category</title>
+</head>
+<body>
+<h1>Thể loại: <span th:text="${category.name}"></span></h1>
+
+<table border="1">
+    <tr>
+        <th>Tên sách </th>
+        <th>Giá thành </th>
+        <th>Tác giả </th>
+    </tr>
+    <th:block th:each="book : ${books}">
+        <tr>
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.author}"></td>
+        </tr>
+    </th:block>
+</table>
+<a href="/category">Trở về </a>
+</body>
+</html>
