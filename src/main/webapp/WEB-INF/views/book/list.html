@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>Home</h1>
+<form>
+    Tìm kiếm sách:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
 
 <a href="/create-book">Thêm mới sách  </a>
 <br>
@@ -33,6 +38,12 @@
         </tr>
     </th:block>
 </table>
+<div>
+    <a th:if="${books.hasPrevious()}" th:href="@{'/books'(page=${books.number - 1})}">previous</a>
+    <span th:text="${books.number + 1}"></span>/<span th:text="${books.totalPages}"></span>
+    <a th:if="${books.hasNext()}" th:href="@{'/books'(page=${books.number + 1})}">next</a>
+
+</div>
 <br>
 <a href="/category">Danh sách thể loại </a>
 </body>

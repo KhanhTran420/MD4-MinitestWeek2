@@ -7,19 +7,23 @@ import com.codegym.service.book.IBookService;
 import com.codegym.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.data.domain.Pageable;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 @Controller
+@PropertySource("classpath:upload_file.properties")
+
 public class BookController {
 
     @Autowired
@@ -75,8 +79,14 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public ModelAndView listBook() {
-        Iterable<Book> books = bookService.findAll();
+    public ModelAndView listBook( Pageable pageable, @RequestParam("search") Optional<String> search) {
+        Page<Book> books ;
+        if (search.isPresent()){
+            books = bookService.findAllByNameContaining(search.get(),pageable);
+        }
+        else {
+            books = bookService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/book/list");
         modelAndView.addObject("books", books);
         return modelAndView;
