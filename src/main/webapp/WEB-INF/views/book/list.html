@@ -16,7 +16,7 @@
         <th>Giá thành</th>
         <th>Tác giả</th>
         <th>Thể loại</th>
-<!--        <th>Hình ảnh</th>-->
+        <th>Hình ảnh</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -27,7 +27,7 @@
             <td th:text="${book.author}"></td>
             <td th:if="${book.category}" th:text="${book.category.name}"></td>
             <td th:unless="${book.category}"></td>
-<!--            <td><img th:src="@{'/image/' + ${book.image}}" width="100" height="100"></td>-->
+            <td><img th:src="@{'/image/' + ${book.image}}" width="100" height="100"></td>
             <td><a th:href="@{/edit-book/__${book.id}__ }">Chỉnh sửa</a></td>
             <td><a th:href="@{/delete-book/__${book.id}__ }">Xóa</a></td>
         </tr>

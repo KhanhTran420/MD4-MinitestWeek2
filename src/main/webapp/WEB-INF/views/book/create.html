@@ -12,7 +12,7 @@
 <th:block th:if="${message}">
     <p th:text="${message}" ></p>
 </th:block>
-<form th:action="@{/create-book}" th:object="${book}" method="post" >
+<form th:action="@{/create-book}" th:object="${book}" method="post" enctype="multipart/form-data" >
     <table>
         <tr>
             <td>Tên sách:</td>
@@ -26,10 +26,10 @@
             <td>Tác giả:</td>
             <td><input type="text" th:field="*{author}"/></td>
         </tr>
-<!--        <tr>-->
-<!--            <td>Hình ảnh:</td>-->
-<!--            <td><input type="file" name="image"/></td>-->
-<!--        </tr>-->
+        <tr>
+            <td>Hình ảnh:</td>
+            <td><input type="file" name="image"/></td>
+        </tr>
         <tr>
             <td>Thể loại:</td>
             <td>

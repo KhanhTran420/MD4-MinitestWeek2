@@ -43,13 +43,13 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories("com.codegym.repository")
 @ComponentScan("com.codegym")
-//@PropertySource("classpath:upload_file.properties")
+@PropertySource("classpath:upload_file.properties")
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-//    @Value("${file-upload}")
-//    private String fileUpload;
+    @Value("${file-upload}")
+    private String fileUpload;
 
 
     @Override
@@ -143,18 +143,18 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     }
 
     //Cấu hình upload file
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/image/**")
-//                .addResourceLocations("file:" + fileUpload);
-//
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/image/**")
+                .addResourceLocations("file:" + fileUpload);
 
-//    @Bean(name = "multipartResolver")
-//    public CommonsMultipartResolver getResolver() throws IOException {
-//        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-//        resolver.setMaxUploadSizePerFile(52428800);
-//        return resolver;
-//    }
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(52428800);
+        return resolver;
+    }
 }
 
