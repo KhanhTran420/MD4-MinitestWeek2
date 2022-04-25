@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Categories</title>
 </head>
 <body>
 <a href="/create-category">Thêm mới thể loại</a>
 <h1 >Danh sách thể loại</h1>
-<table border="1">
+<table id="category">
     <tr>
         <th>ID</th>
         <th>Thể loại</th>
@@ -28,5 +28,7 @@
     </th:block>
 </table>
 <a href="/books">Book list</a>
+<footer th:replace="/layout :: footer"></footer>
+
 </body>
 </html>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Delete Book</title>
 </head>
 <body>
 <h1 >Xóa sách</h1>
-<h2 >Bạn có chắc chắn muốn xóa?</h2>
+<h2 style="color: burlywood;font-family: sans-serif" >Bạn có chắc chắn muốn xóa?</h2>
+<div id="form">
+
 <form th:action="@{/delete-book}" th:object="${book}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
@@ -28,6 +30,9 @@
         </tr>
     </table>
 </form>
+</div>
 <a href="/category"></a>
+<footer th:replace="/layout :: footer"></footer>
+
 </body>
 </html>

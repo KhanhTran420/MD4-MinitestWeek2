@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Edit book</title>
 </head>
@@ -8,11 +8,12 @@
 <h1>Chỉnh sửa sách</h1>
 
 <th:block th:if="${message}">
-    <p th:text="${message}"></p>
+    <p p style="color: blueviolet" th:text="${message}"></p>
 </th:block>
+<div id="form">
 <form th:action="@{/edit-book}" th:object="${book}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
-    <table>
+    <table id="book">
         <tr>
             <td>Tên sách:</td>
             <td><input type="text" th:field="*{name}"/></td>
@@ -43,10 +44,12 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Chỉnh sửa"></td>
+            <td colspan="2"><input type="submit" value="Chỉnh sửa"></td>
         </tr>
     </table>
 </form>
+</div>
 <a href="/books">Trở về</a>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

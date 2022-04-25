@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Book</title>
 </head>
@@ -15,7 +15,7 @@
 <a href="/create-book">Thêm mới sách  </a>
 <br>
 <br>
-<table border="1">
+<table id="book">
     <tr>
         <th>Tên sách </th>
         <th>Giá thành</th>
@@ -46,5 +46,7 @@
 </div>
 <br>
 <a href="/category">Danh sách thể loại </a>
+<footer th:replace="/layout :: footer"></footer>
+
 </body>
 </html>
