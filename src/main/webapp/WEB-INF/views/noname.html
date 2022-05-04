@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript">
         function addNewBook() {
             //lay du lieu
             let name = $('#name').val();
             let author = $('#author').val();
             let price = $('#price').val();
-            let category = $('#category')
+            let category = $('#category').val();
             let newBook = {
                 name: name,
                 price: price,
@@ -43,19 +43,26 @@
                 //xử lý khi thành công
                 success: function (data) {
                     // hien thi danh sach o day
-                    let content = ''
+                    let content = ' <tr>\n' +
+                        '        <td>Name</td>\n' +
+                        '        <td>Price</td>\n' +
+                        '        <td>Author</td>\n' +
+                        '        <td>Category</td>\n' +
+                        '        <td>Update</td>\n' +
+                        '        <td>Delete</td>\n' +
+                        '    </tr>'
                     for (let i = 0; i < data.length; i++) {
                         content += getBook(data[i]);
                     }
-                    document.getElementById('showList').innerHTML = content;
+                    document.getElementById('bookList').innerHTML = content;
                 }
             });
         }
 
         function getBook(book) {
             return `<tr><td >${book.name}</td><td >${book.price}</td><td >${book.author}</td><td >${book.category.name}</td>` +
-                `<td><button type="button" onclick="showEditForm(${book.id}})">update</button></td>`+
-                `<td><button onclick="deleteBook(${book.id})">Delete</button></tr>`;
+                `<td><button type="button" onclick="showEditForm(this)">update</button></td>`+
+                `<td><button onclick="deleteBook(this)">Delete</button></td></tr>`;
         }
 
         function showEditForm(id) {
@@ -128,7 +135,7 @@
             <td>Category:</td>
             <td>
                 <select id="category">
-                    <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                    <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}" ></option>
                 </select>
             </td>
         </tr>
@@ -140,8 +147,8 @@
 </form>
 
 <h1>Book List</h1>
-<table>
-    <tr id="bookList">
+<table id="bookList">
+    <tr>
         <td>Name</td>
         <td>Price</td>
         <td>Author</td>
@@ -149,8 +156,16 @@
         <td>Update</td>
         <td>Delete</td>
     </tr>
-    <tbody id="showList">
-    </tbody>
+    <th:block th:each="book: ${books}" >
+        <tr>
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.category.name}"></td>
+            <td><button type="button" onclick="showEditForm(this)">update</button></td>
+            <td><button type="button" onclick="deleteBook(this)">Delete</button></td>
+        </tr>
+    </th:block>
 </table>
 </body>
 </html>
