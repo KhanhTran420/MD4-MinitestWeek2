@@ -62,7 +62,7 @@
         function getBook(book) {
             return `<tr><td >${book.name}</td><td >${book.price}</td><td >${book.author}</td><td >${book.category.name}</td>` +
                 `<td><button type="button" onclick="showEditForm(this)">update</button></td>`+
-                `<td><button onclick="deleteBook(this)">Delete</button></td></tr>`;
+                `<td><button href="${book.id}" type="button" onclick="deleteBook(this)">Delete</button></td></tr>`;
         }
 
         function showEditForm(id) {
@@ -107,13 +107,15 @@
         }
 
         function deleteBook(id){
+            let bookId = id.getAttribute("href");
             $.ajax({
                 type:"DELETE",
-                url:`/books/${id}`,
+                url:`/books/${bookId}`,
                 success: successHandler
             })
+            event.preventDefault();
         }
-        $(document).ready( successHandler());
+
     </script>
 </head>
 <body>
@@ -163,7 +165,7 @@
             <td th:text="${book.author}"></td>
             <td th:text="${book.category.name}"></td>
             <td><button type="button" onclick="showEditForm(this)">update</button></td>
-            <td><button type="button" onclick="deleteBook(this)">Delete</button></td>
+            <td><button th:href="${book.getId()}" type="button" onclick="deleteBook(this)">Delete</button></td>
         </tr>
     </th:block>
 </table>
